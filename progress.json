@@ -1,0 +1,11 @@
+{
+  "version": "0.2",
+  "title": "Hot Season Adventure",
+  "subtitle": "Next update progress",
+  "categories": [
+    { "name": "Art / Animation", "color": "#c084fc", "done": 19, "total": 46 },
+    { "name": "Writing",         "color": "#34d399", "done": 16, "total": 16 },
+    { "name": "Coding",          "color": "#60a5fa", "done": 3,  "total": 26 },
+    { "name": "Music / Sound",   "color": "#fb923c", "done": 0,  "total": 6  }
+  ]
+}
