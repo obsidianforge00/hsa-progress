@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSA Progress</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #12131a; font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1.5rem; }
+  .preview { background: #12131a; border-radius: 16px; padding: 1.5rem; width: 100%; max-width: 480px; }
+  .pv-header { text-align: center; margin-bottom: 1.25rem; }
+  .pv-title { font-size: 11px; letter-spacing: 3px; color: #666; text-transform: uppercase; margin-bottom: 4px; }
+  .pv-sub { font-size: 15px; font-weight: 600; color: #eee; }
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .card { background: #1c1e2b; border-radius: 12px; padding: 14px 16px; position: relative; overflow: hidden; }
+  .card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; }
+  .card-name { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #888; margin-bottom: 10px; margin-top: 2px; }
+  .card-pct { font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+  .card-pct span { font-size: 14px; font-weight: 400; color: #555; }
+  .card-bar-bg { height: 5px; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; margin-bottom: 8px; }
+  .card-bar-fg { height: 100%; border-radius: 10px; }
+  .card-count { font-size: 11px; color: #555; }
+  .error { color: #fb923c; text-align: center; font-size: 13px; padding: 2rem; }
+</style>
+</head>
+<body>
+<div class="preview" id="preview">
+  <div class="pv-header">
+    <div class="pv-title" id="title"></div>
+    <div class="pv-sub" id="subtitle"></div>
+  </div>
+  <div class="cards" id="cards"></div>
+</div>
+
+<script>
+const JSON_URL = 'https://raw.githubusercontent.com/whadoio/hsa-progress/main/progress.json';
+
+function pct(c) {
+  return c.total === 0 ? 0 : Math.round((c.done / c.total) * 100);
+}
+
+async function load() {
+  try {
+    const res = await fetch(JSON_URL + '?t=' + Date.now());
+    const data = await res.json();
+
+    document.getElementById('title').textContent = data.title;
+    document.getElementById('subtitle').textContent = data.subtitle;
+
+    document.getElementById('cards').innerHTML = data.categories.map(c => `
+      <div class="card">
+        <div class="card-accent" style="background:${c.color}"></div>
+        <div class="card-name">${c.name}</div>
+        <div class="card-pct" style="color:${c.color}">${pct(c)}<span>%</span></div>
+        <div class="card-bar-bg">
+          <div class="card-bar-fg" style="width:${pct(c)}%;background:${c.color}"></div>
+        </div>
+        <div class="card-count">${c.done} / ${c.total} tasks</div>
+      </div>
+    `).join('');
+  } catch (e) {
+    document.getElementById('preview').innerHTML = '<div class="error">progress.json yüklenemedi.</div>';
+  }
+}
+
+load();
+</script>
+</body>
+</html>
