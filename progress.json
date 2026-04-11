@@ -2,6 +2,8 @@
   "version": "0.2",
   "title": "Hot Season Adventure",
   "subtitle": "Next update progress",
+  "patreon_date": "TBD",
+  "public_date": "TBD",
   "categories": [
     { "name": "Art / Animation", "color": "#c084fc", "done": 19, "total": 46 },
     { "name": "Writing",         "color": "#34d399", "done": 16, "total": 16 },
