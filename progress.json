@@ -5,8 +5,8 @@
   "patreon_date": "TBD",
   "public_date": "TBD",
   "categories": [
-    { "name": "Art / Animation", "color": "#c084fc", "done": 37, "total": 96 },
-    { "name": "Writing",         "color": "#34d399", "done": 14, "total": 27 },
+    { "name": "Art / Animation", "color": "#c084fc", "done": 42, "total": 96 },
+    { "name": "Writing",         "color": "#34d399", "done": 16, "total": 27 },
     { "name": "Coding",          "color": "#60a5fa", "done": 52,  "total": 142 },
     { "name": "Music / Sound",   "color": "#fb923c", "done": 0,  "total": 6  }
   ]
